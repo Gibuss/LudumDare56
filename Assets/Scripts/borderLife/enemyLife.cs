@@ -6,12 +6,19 @@ public class enemyLife : MonoBehaviour
     public int currentLife;
 
     public emptylife lifeBar;
-    public GameObject lifeBarObject;
+    public RectTransform lifeBarObject;
+    public Vector3 lifeBarOffset = new Vector3(0, 50, 0);
+    public Camera mainCamera;
 
     public void Start()
     {
         currentLife = MaxLife;
         lifeBar.SetMaxLife(MaxLife);
+
+        if (mainCamera == null)
+        {
+            mainCamera = Camera.main;
+        }
     }
 
     public void Update()
@@ -20,9 +27,15 @@ public class enemyLife : MonoBehaviour
         {
             TakeDamage(20);
         }
+
+        if (lifeBarObject != null)
+        {
+            Vector3 screenPosition = mainCamera.WorldToScreenPoint(transform.position);
+            lifeBarObject.position = screenPosition + lifeBarOffset;
+        }
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         currentLife -= damage;
         lifeBar.SetLife(currentLife);
@@ -35,7 +48,7 @@ public class enemyLife : MonoBehaviour
     void Die()
     {
 
-        Destroy(lifeBarObject);
+        Destroy(lifeBarObject.gameObject);
 
         Destroy(gameObject);
     }
