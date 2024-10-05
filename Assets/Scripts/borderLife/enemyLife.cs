@@ -28,11 +28,11 @@ public class enemyLife : MonoBehaviour
             TakeDamage(20);
         }
 
-        if (lifeBarObject != null)
-        {
-            Vector3 screenPosition = mainCamera.WorldToScreenPoint(transform.position);
-            lifeBarObject.position = screenPosition + lifeBarOffset;
-        }
+        //if (lifeBarObject != null)
+        //{
+        //    Vector3 screenPosition = mainCamera.WorldToScreenPoint(transform.position);
+        //    lifeBarObject.position = screenPosition + lifeBarOffset;
+        //}
     }
 
     public void TakeDamage(int damage)
