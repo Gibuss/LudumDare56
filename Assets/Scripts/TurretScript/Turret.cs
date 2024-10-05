@@ -43,12 +43,10 @@ public class Turret : MonoBehaviour
         {
             target = hits[0].transform;
             StartDamageCoroutine();
-            Debug.Log("Ennemi trouvé : " + target.name);
         }
         else
         {
             StopDamageCoroutine();
-            Debug.Log("Aucun ennemi trouvé");
         }
     }
 
@@ -64,8 +62,6 @@ public class Turret : MonoBehaviour
             float angle = Mathf.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
             Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
             turretRotationPoint.rotation = targetRotation;
-
-            Debug.Log("Tourelle en rotation vers : " + target.name);
         }
     }
 
@@ -81,10 +77,18 @@ public class Turret : MonoBehaviour
     {
         while (target != null)
         {
-            if (target.TryGetComponent<enemyLife>(out enemyLife enemy))
+            if (CheckTargetIsInRange())
             {
-                enemy.TakeDamage(damage);
+                if (target.TryGetComponent<enemyLife>(out enemyLife enemy))
+                {
+                    enemy.TakeDamage(damage);
+                }
             }
+            else
+            {
+                break;
+            }
+
             yield return new WaitForSeconds(damageInterval);
         }
 
