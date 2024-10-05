@@ -4,25 +4,36 @@ using UnityEngine;
 
 public class EnnemyPath : MonoBehaviour
 {
-    [SerializeField] Transform[] Points;
+    [SerializeField] Transform[] PointsA;  
+    [SerializeField] Transform[] PointsB;  
     [SerializeField] private float moveSpeed;
 
+    private Transform[] selectedPoints;    
     private int pointsIndex;
-    private Vector2 targetPosition; 
+    private Vector2 targetPosition;
 
     [SerializeField] private float offsetRange = 0.525f;
 
     // Start is called before the first frame update
     void Start()
     {
-        targetPosition = GetRandomPosition(Points[pointsIndex].position);
+        if (Random.value < 0.5f)  
+        {
+            selectedPoints = PointsA;
+        }
+        else
+        {
+            selectedPoints = PointsB;
+        }
+
+        targetPosition = GetRandomPosition(selectedPoints[pointsIndex].position);
         transform.position = targetPosition;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (pointsIndex < Points.Length)
+        if (pointsIndex < selectedPoints.Length)
         {
             transform.position = Vector2.MoveTowards(transform.position, targetPosition, moveSpeed * Time.deltaTime);
 
@@ -30,9 +41,9 @@ public class EnnemyPath : MonoBehaviour
             {
                 pointsIndex++;
 
-                if (pointsIndex < Points.Length)
+                if (pointsIndex < selectedPoints.Length)
                 {
-                    targetPosition = GetRandomPosition(Points[pointsIndex].position); 
+                    targetPosition = GetRandomPosition(selectedPoints[pointsIndex].position);
                 }
             }
         }
