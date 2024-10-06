@@ -45,7 +45,7 @@ public class enemyLife : MonoBehaviour
 
         if (currentLife <= 0)
         {
-            currencyManager.AddCurrencyOnDeath(gameObject.name);
+            currencyManager.AddCurrencyOnMobDeath(gameObject.name);
             Die();
         }
     }

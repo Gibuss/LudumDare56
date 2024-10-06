@@ -6,12 +6,21 @@ using System;
 
 public class CurrencyManager : MonoBehaviour
 {
+    [Header("Initialization")]
     [SerializeField] private TMP_Text displayedCurrency;
     [SerializeField] private int currentCurrency;
-    [SerializeField] private int antCurrency;
-    [SerializeField] private int beetleCurrency;
-    [SerializeField] private int ladybugCurrency;
-    [SerializeField] private int termiteCurrency;
+
+    [Header("Ennemies gains")]
+    [SerializeField] private int antGain;
+    [SerializeField] private int beetleGain;
+    [SerializeField] private int ladybugGain;
+    [SerializeField] private int termiteGain;
+
+    [Header("Turrets Costs")]
+    [SerializeField] private int beeCost;
+    [SerializeField] private int bumbeeCost;
+    [SerializeField] private int hornetCost;
+    [SerializeField] private int waspCost;
 
 
     void Start()
@@ -29,26 +38,57 @@ public class CurrencyManager : MonoBehaviour
         displayedCurrency.text = string.Format("{0}", newCurrency);
     }
 
-    public void AddCurrencyOnDeath(string type)
+    public void AddCurrencyOnMobDeath(string type)
     {
         if (type.ToLower().Substring(0, 8) == "enemyant")
         {
-            currentCurrency += antCurrency;
+            currentCurrency += antGain;
             SetCurrency(currentCurrency);
         } else if (type.ToLower().Substring(0, 11) == "enemybeetle")
         {
-            currentCurrency += beetleCurrency;
+            currentCurrency += beetleGain;
             SetCurrency(currentCurrency);
         }
         else if (type.ToLower().Substring(0, 12) == "enemyladybug")
         {
-            currentCurrency += ladybugCurrency;
+            currentCurrency += ladybugGain;
             SetCurrency(currentCurrency);
         }
         else if (type.ToLower().Substring(0, 12) == "enemytermite")
         {
-            currentCurrency += termiteCurrency;
+            currentCurrency += termiteGain;
             SetCurrency(currentCurrency);
+        }
+    }
+
+    public bool SubstractCurrencyOnTowerPlacement(string type)
+    {
+        if (type.ToLower().Substring(0, 3) == "bee" && (currentCurrency-beeCost) >= 0)
+        {
+            currentCurrency -= beeCost;
+            SetCurrency(currentCurrency);
+            return true;
+        }
+        else if (type.ToLower().Substring(0, 6) == "bumbee" && (currentCurrency - bumbeeCost) >= 0)
+        {
+            currentCurrency -= bumbeeCost;
+            SetCurrency(currentCurrency);
+            return true;
+        }
+        else if (type.ToLower().Substring(0, 6) == "hornet" && (currentCurrency - hornetCost) >= 0)
+        {
+            currentCurrency -= hornetCost;
+            SetCurrency(currentCurrency);
+            return true;
+        }
+        else if (type.ToLower().Substring(0, 4) == "wasp" && (currentCurrency - waspCost) >= 0)
+        {
+            currentCurrency -= waspCost;
+            SetCurrency(currentCurrency);
+            return true;
+        } else
+        {
+            return false;
         }
     }
 }
