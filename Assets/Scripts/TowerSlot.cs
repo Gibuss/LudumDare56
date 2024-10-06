@@ -5,19 +5,24 @@ using UnityEngine.EventSystems;
 
 public class TowerSlot : MonoBehaviour, IDropHandler
 {
-    private bool towerAlreadyThere;
+    [SerializeField] private GameObject targetObject;
 
-    public void Awake()
-    {
-        towerAlreadyThere = false;
-    }
     public void OnDrop(PointerEventData eventData)
     {
         Debug.Log("OnDrop2");
-        if (eventData.pointerDrag.GetComponent<DragTower>() != null && !towerAlreadyThere)
+
+        if (eventData.pointerDrag.GetComponent<DragTower>() != null)
         {
-            GameObject towerObject = Instantiate(eventData.pointerDrag.GetComponent<DragTower>().GetPrefabTower(), gameObject.GetComponent<RectTransform>());
-            towerAlreadyThere = true;
+            if (targetObject.transform.childCount > 0)
+            {
+                Debug.Log("Une tour est déjà présente sur l'objet cible !");
+                return;
+            }
+
+            GameObject towerObject = Instantiate(eventData.pointerDrag.GetComponent<DragTower>().GetPrefabTower(), targetObject.transform);
+            towerObject.transform.localPosition = Vector2.zero;
+
+            Debug.Log("Tour placée sur l'objet cible");
         }
     }
 }

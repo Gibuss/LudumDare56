@@ -28,16 +28,17 @@ public class enemyLife : MonoBehaviour
             TakeDamage(20);
         }
 
-        //if (lifeBarObject != null)
-        //{
-        //    Vector3 screenPosition = mainCamera.WorldToScreenPoint(transform.position);
-        //    lifeBarObject.position = screenPosition + lifeBarOffset;
-        //}
+        if (lifeBarObject != null)
+        {
+            Vector3 screenPosition = mainCamera.WorldToScreenPoint(transform.position + lifeBarOffset);
+            lifeBarObject.position = screenPosition;
+        }
     }
 
     public void TakeDamage(int damage)
     {
         currentLife -= damage;
+        currentLife = Mathf.Max(currentLife, 0);
         lifeBar.SetLife(currentLife);
 
         if (currentLife <= 0)
@@ -45,11 +46,10 @@ public class enemyLife : MonoBehaviour
             Die();
         }
     }
+
     void Die()
     {
-
         Destroy(lifeBarObject.gameObject);
-
         Destroy(gameObject);
     }
 }

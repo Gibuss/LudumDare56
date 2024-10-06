@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class DragTower : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+    
     [SerializeField] private Canvas canvas;
     [SerializeField] private GameObject prefabTower;
     private RectTransform rectTransform;

@@ -6,13 +6,16 @@ using UnityEditor;
 public class Turret : MonoBehaviour
 {
     [Header("References")]
-    [SerializeField] private Transform turretRotationPoint;
+    [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private LayerMask enemyMask;
 
     [Header("Attributes")]
     [SerializeField] private float targetingRange = 5f;
-    [SerializeField] private int damage = 1;
-    [SerializeField] private float damageInterval = 2f;
+    [SerializeField] private int damage = 2;
+    [SerializeField] private float damageInterval = 1f;
+
+    [Header("Debug")]
+    [SerializeField] private bool showGizmos = true;
 
     private Transform target;
     private Coroutine damageCoroutine;
@@ -25,7 +28,7 @@ public class Turret : MonoBehaviour
         }
         else
         {
-            RotateTowardsTarget();
+            FlipTowardsTarget();
 
             if (!CheckTargetIsInRange())
             {
@@ -55,13 +58,18 @@ public class Turret : MonoBehaviour
         return Vector2.Distance(target.position, transform.position) <= targetingRange;
     }
 
-    private void RotateTowardsTarget()
+    private void FlipTowardsTarget()
     {
         if (target != null)
         {
-            float angle = Mathf.Atan2(target.position.y - transform.position.y, target.position.x - transform.position.x) * Mathf.Rad2Deg - 90f;
-            Quaternion targetRotation = Quaternion.Euler(new Vector3(0f, 0f, angle));
-            turretRotationPoint.rotation = targetRotation;
+            if (target.position.x < transform.position.x)
+            {
+                spriteRenderer.flipX = true;
+            }
+            else
+            {
+                spriteRenderer.flipX = false;
+            }
         }
     }
 
@@ -104,9 +112,12 @@ public class Turret : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
-        Handles.color = Color.cyan;
-        Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
+        if (showGizmos)
+        {
+            Handles.color = Color.cyan;
+            Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
+        }
     }
 }
