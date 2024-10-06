@@ -23,7 +23,6 @@ public class defenderLife : MonoBehaviour
 
     public void Update()
     {
-        // Cette section peut être supprimée ou maintenue si vous souhaitez garder une méthode de test
         if (Input.GetKeyDown(KeyCode.D))
         {
             TakeDamage(20);
@@ -36,7 +35,6 @@ public class defenderLife : MonoBehaviour
         }
     }
 
-    // Changer la visibilité de cette méthode à public
     public void TakeDamage(int damage)
     {
         currentLife -= damage;

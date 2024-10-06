@@ -5,7 +5,6 @@ using UnityEngine.EventSystems;
 
 public class TowerSlot : MonoBehaviour, IDropHandler
 {
-    [SerializeField] private GameObject targetObject;
     private CurrencyManager currencyManager;
 
     public void Awake()
@@ -15,29 +14,18 @@ public class TowerSlot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("OnDrop2");
-
         if (eventData.pointerDrag.GetComponent<DragTower>() != null)
         {
-            if (targetObject.transform.childCount > 0)
+            if (transform.childCount > 0)
             {
-                Debug.Log("Une tour est déjà présente sur l'objet cible !");
                 return;
             }
 
-            if(currencyManager.SubstractCurrencyOnTowerPlacement(eventData.pointerDrag.GetComponent<DragTower>().GetPrefabTower().name))
+            if (currencyManager.SubstractCurrencyOnTowerPlacement(eventData.pointerDrag.GetComponent<DragTower>().GetPrefabTower().name))
             {
-                GameObject towerObject = Instantiate(eventData.pointerDrag.GetComponent<DragTower>().GetPrefabTower(), targetObject.transform);
+                GameObject towerObject = Instantiate(eventData.pointerDrag.GetComponent<DragTower>().GetPrefabTower(), transform);
                 towerObject.transform.localPosition = Vector2.zero;
-
-                Debug.Log("Tour placée sur l'objet cible");
-            } else
-            {
-                Debug.Log("on a pas l'argent");
             }
-            
-
-            
         }
     }
 }

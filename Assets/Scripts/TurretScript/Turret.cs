@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
+    [Header("Projectile")]
+    [SerializeField] private GameObject projectilePrefab;
+
     [Header("References")]
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private LayerMask enemyMask;
@@ -25,14 +28,17 @@ public class Turret : MonoBehaviour
         HandleAttack();
     }
 
-    // Fonction pour trouver la cible la plus proche dans la range
+    private void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     private void TargetFind()
     {
         Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(transform.position, targetingRange, enemyMask);
 
         if (enemiesInRange.Length > 0)
         {
-            // Si l'ennemi actuel est hors de la zone, on en cherche un nouveau
             if (target == null || Vector2.Distance(transform.position, target.position) > targetingRange)
             {
                 target = GetClosestEnemy(enemiesInRange);
@@ -40,11 +46,10 @@ public class Turret : MonoBehaviour
         }
         else
         {
-            target = null; // Si aucun ennemi dans la zone, pas de cible
+            target = null;
         }
     }
 
-    // Trouver l'ennemi le plus proche parmi les ennemis dans la zone
     private Transform GetClosestEnemy(Collider2D[] enemies)
     {
         Transform closestEnemy = null;
@@ -63,50 +68,54 @@ public class Turret : MonoBehaviour
         return closestEnemy;
     }
 
-    // Fonction pour orienter la tour vers la cible
     private void FlipTowardsTarget()
     {
         if (target != null)
         {
-            if (target.position.x < transform.position.x)
+            bool shouldFlip = target.position.x < transform.position.x;
+
+            if (shouldFlip && !spriteRenderer.flipX)
             {
                 spriteRenderer.flipX = true;
             }
-            else
+            else if (!shouldFlip && spriteRenderer.flipX)
             {
                 spriteRenderer.flipX = false;
             }
         }
     }
 
-    // Gérer l'attaque contre l'ennemi
     private void HandleAttack()
     {
         if (target != null)
         {
-            // Si le cooldown est terminé et que l'ennemi est toujours dans la zone
             if (Time.time >= nextDamageTime)
             {
-                // Appliquer les dégâts
-                DoDamage(target);
-                // Set next attack time based on damage interval
+                ShootProjectile();
                 nextDamageTime = Time.time + damageInterval;
             }
         }
     }
 
-    // Appliquer des dégâts à l'ennemi
-    private void DoDamage(Transform enemy)
+    private void ShootProjectile()
     {
-        // On cherche le composant enemyLife sur l'ennemi pour lui infliger des dégâts
-        enemyLife enemyScript = enemy.GetComponent<enemyLife>();
-        if (enemyScript != null)
+        GameObject projectileInstance = Instantiate(projectilePrefab, transform.position, Quaternion.identity);
+        Projectile projectileScript = projectileInstance.GetComponent<Projectile>();
+        if (projectileScript != null)
         {
-            enemyScript.TakeDamage(damage); // Appel de la fonction TakeDamage
+            projectileScript.SetTarget(target);
         }
     }
 
-    // Dessiner la zone de portée avec Gizmos
+    private void DoDamage(Transform enemy)
+    {
+        enemyLife enemyScript = enemy.GetComponent<enemyLife>();
+        if (enemyScript != null)
+        {
+            enemyScript.TakeDamage(damage);
+        }
+    }
+
     private void OnDrawGizmos()
     {
         if (showGizmos)
