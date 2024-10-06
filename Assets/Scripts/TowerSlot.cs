@@ -6,6 +6,12 @@ using UnityEngine.EventSystems;
 public class TowerSlot : MonoBehaviour, IDropHandler
 {
     [SerializeField] private GameObject targetObject;
+    private CurrencyManager currencyManager;
+
+    public void Awake()
+    {
+        currencyManager = GameObject.Find("CurrencyManager").GetComponent<CurrencyManager>();
+    }
 
     public void OnDrop(PointerEventData eventData)
     {
@@ -19,10 +25,19 @@ public class TowerSlot : MonoBehaviour, IDropHandler
                 return;
             }
 
-            GameObject towerObject = Instantiate(eventData.pointerDrag.GetComponent<DragTower>().GetPrefabTower(), targetObject.transform);
-            towerObject.transform.localPosition = Vector2.zero;
+            if(currencyManager.SubstractCurrencyOnTowerPlacement(eventData.pointerDrag.GetComponent<DragTower>().GetPrefabTower().name))
+            {
+                GameObject towerObject = Instantiate(eventData.pointerDrag.GetComponent<DragTower>().GetPrefabTower(), targetObject.transform);
+                towerObject.transform.localPosition = Vector2.zero;
 
-            Debug.Log("Tour placée sur l'objet cible");
+                Debug.Log("Tour placée sur l'objet cible");
+            } else
+            {
+                Debug.Log("on a pas l'argent");
+            }
+            
+
+            
         }
     }
 }

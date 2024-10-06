@@ -3196,10 +3196,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayedCurrency: {fileID: 358591470}
   currentCurrency: 30
-  antCurrency: 10
-  beetleCurrency: 20
-  ladybugCurrency: 30
-  termiteCurrency: 40
+  antGain: 10
+  beetleGain: 20
+  ladybugGain: 30
+  termiteGain: 40
+  beeCost: 1
+  bumbeeCost: 2
+  hornetCost: 3
+  waspCost: 4
 --- !u!1 &1242941586
 GameObject:
   m_ObjectHideFlags: 0
