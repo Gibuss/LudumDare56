@@ -83,6 +83,7 @@ Transform:
   - {fileID: 1808899476905318922}
   - {fileID: 7766997083046874427}
   - {fileID: 1492522022124364221}
+  - {fileID: 781243231920774217}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4194176001914551580
@@ -277,6 +278,56 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &4584855423111077036
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 781243231920774217}
+  - component: {fileID: 3721967606350775669}
+  m_Layer: 0
+  m_Name: PhaseManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &781243231920774217
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4584855423111077036}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.312731, y: -0.2859298, z: 0.050072215}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8264621738004044009}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3721967606350775669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4584855423111077036}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ec995054212b1a747a475ff353de5914, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  antSpawner: {fileID: 2375102163574763125}
+  termiteSpawner: {fileID: 8764174341044422169}
+  ladybugSpawner: {fileID: 6871872120444310857}
+  beetleSpawner: {fileID: 4596341373591931683}
+  timeBeetwenPhases: 5
+  phaseDatabase: {fileID: 11400000, guid: 293dc79c89c304946a96db888fb0fe80, type: 2}
 --- !u!1 &4998766712551377323
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,10 +474,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayedCurrency: {fileID: 0}
   currentCurrency: 20
-  antCurrency: 5
-  beetleCurrency: 25
-  ladybugCurrency: 15
-  termiteCurrency: 10
+  antGain: 5
+  beetleGain: 20
+  ladybugGain: 15
+  termiteGain: 10
+  beeCost: 15
+  bumbeeCost: 50
+  hornetCost: 30
+  waspCost: 20
 --- !u!1 &7527420539600623979
 GameObject:
   m_ObjectHideFlags: 0
