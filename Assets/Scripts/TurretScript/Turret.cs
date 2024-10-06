@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 public class Turret : MonoBehaviour
 {
@@ -18,46 +16,54 @@ public class Turret : MonoBehaviour
     [SerializeField] private bool showGizmos = true;
 
     private Transform target;
-    private Coroutine damageCoroutine;
+    private float nextDamageTime;
 
     private void Update()
     {
-        if (target == null)
-        {
-            FindTarget();
-        }
-        else
-        {
-            FlipTowardsTarget();
+        TargetFind();
+        FlipTowardsTarget();
+        HandleAttack();
+    }
 
-            if (!CheckTargetIsInRange())
+    // Fonction pour trouver la cible la plus proche dans la range
+    private void TargetFind()
+    {
+        Collider2D[] enemiesInRange = Physics2D.OverlapCircleAll(transform.position, targetingRange, enemyMask);
+
+        if (enemiesInRange.Length > 0)
+        {
+            // Si l'ennemi actuel est hors de la zone, on en cherche un nouveau
+            if (target == null || Vector2.Distance(transform.position, target.position) > targetingRange)
             {
-                StopDamageCoroutine();
-                target = null;
+                target = GetClosestEnemy(enemiesInRange);
             }
         }
-    }
-
-    private void FindTarget()
-    {
-        RaycastHit2D[] hits = Physics2D.CircleCastAll(transform.position, targetingRange, Vector2.zero, 0f, enemyMask);
-
-        if (hits.Length > 0)
-        {
-            target = hits[0].transform;
-            StartDamageCoroutine();
-        }
         else
         {
-            StopDamageCoroutine();
+            target = null; // Si aucun ennemi dans la zone, pas de cible
         }
     }
 
-    private bool CheckTargetIsInRange()
+    // Trouver l'ennemi le plus proche parmi les ennemis dans la zone
+    private Transform GetClosestEnemy(Collider2D[] enemies)
     {
-        return Vector2.Distance(target.position, transform.position) <= targetingRange;
+        Transform closestEnemy = null;
+        float closestDistance = Mathf.Infinity;
+
+        foreach (Collider2D enemy in enemies)
+        {
+            float distanceToEnemy = Vector2.Distance(transform.position, enemy.transform.position);
+            if (distanceToEnemy < closestDistance)
+            {
+                closestDistance = distanceToEnemy;
+                closestEnemy = enemy.transform;
+            }
+        }
+
+        return closestEnemy;
     }
 
+    // Fonction pour orienter la tour vers la cible
     private void FlipTowardsTarget()
     {
         if (target != null)
@@ -73,51 +79,40 @@ public class Turret : MonoBehaviour
         }
     }
 
-    private void StartDamageCoroutine()
+    // Gérer l'attaque contre l'ennemi
+    private void HandleAttack()
     {
-        if (damageCoroutine == null)
+        if (target != null)
         {
-            damageCoroutine = StartCoroutine(InflictDamage());
-        }
-    }
-
-    private IEnumerator InflictDamage()
-    {
-        while (target != null)
-        {
-            if (CheckTargetIsInRange())
+            // Si le cooldown est terminé et que l'ennemi est toujours dans la zone
+            if (Time.time >= nextDamageTime)
             {
-                if (target.TryGetComponent<enemyLife>(out enemyLife enemy))
-                {
-                    enemy.TakeDamage(damage);
-                }
+                // Appliquer les dégâts
+                DoDamage(target);
+                // Set next attack time based on damage interval
+                nextDamageTime = Time.time + damageInterval;
             }
-            else
-            {
-                break;
-            }
-
-            yield return new WaitForSeconds(damageInterval);
         }
-
-        damageCoroutine = null;
     }
 
-    private void StopDamageCoroutine()
+    // Appliquer des dégâts à l'ennemi
+    private void DoDamage(Transform enemy)
     {
-        if (damageCoroutine != null)
+        // On cherche le composant enemyLife sur l'ennemi pour lui infliger des dégâts
+        enemyLife enemyScript = enemy.GetComponent<enemyLife>();
+        if (enemyScript != null)
         {
-            StopCoroutine(damageCoroutine);
-            damageCoroutine = null;
+            enemyScript.TakeDamage(damage); // Appel de la fonction TakeDamage
         }
     }
 
+    // Dessiner la zone de portée avec Gizmos
     private void OnDrawGizmos()
     {
         if (showGizmos)
         {
-            Handles.color = Color.cyan;
-            Handles.DrawWireDisc(transform.position, transform.forward, targetingRange);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, targetingRange);
         }
     }
 }
