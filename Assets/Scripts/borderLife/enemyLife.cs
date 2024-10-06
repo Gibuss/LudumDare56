@@ -49,7 +49,6 @@ public class enemyLife : MonoBehaviour
 
     void Die()
     {
-        Destroy(lifeBarObject.gameObject);
         Destroy(gameObject);
     }
 }
