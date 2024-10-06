@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class defenderLife : MonoBehaviour
 {
     public int MaxLife = 100;
@@ -10,6 +9,7 @@ public class defenderLife : MonoBehaviour
     public RectTransform lifeBarObject;
     public Vector3 lifeBarOffset = new Vector3(0, 50, 0);
     public Camera mainCamera;
+
     public void Start()
     {
         currentLife = MaxLife;
@@ -23,7 +23,8 @@ public class defenderLife : MonoBehaviour
 
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.D))
+        // Cette section peut être supprimée ou maintenue si vous souhaitez garder une méthode de test
+        if (Input.GetKeyDown(KeyCode.D))
         {
             TakeDamage(20);
         }
@@ -35,20 +36,21 @@ public class defenderLife : MonoBehaviour
         }
     }
 
-    void TakeDamage(int damage)
+    // Changer la visibilité de cette méthode à public
+    public void TakeDamage(int damage)
     {
         currentLife -= damage;
         lifeBar.SetLife(currentLife);
 
-        if(currentLife <= 0)
+        if (currentLife <= 0)
         {
             Die();
         }
     }
+
     void Die()
     {
         Destroy(gameObject);
-
         Debug.Log("Le défenseur est mort");
     }
 }
