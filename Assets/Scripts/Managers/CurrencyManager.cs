@@ -8,8 +8,12 @@ public class CurrencyManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text displayedCurrency;
     [SerializeField] private int currentCurrency;
+    [SerializeField] private int antCurrency;
+    [SerializeField] private int beetleCurrency;
+    [SerializeField] private int ladybugCurrency;
+    [SerializeField] private int termiteCurrency;
 
-   
+
     void Start()
     {
         SetCurrency(currentCurrency);
@@ -29,7 +33,21 @@ public class CurrencyManager : MonoBehaviour
     {
         if (type.ToLower().Substring(0, 8) == "enemyant")
         {
-            currentCurrency += 20;
+            currentCurrency += antCurrency;
+            SetCurrency(currentCurrency);
+        } else if (type.ToLower().Substring(0, 11) == "enemybeetle")
+        {
+            currentCurrency += beetleCurrency;
+            SetCurrency(currentCurrency);
+        }
+        else if (type.ToLower().Substring(0, 12) == "enemyladybug")
+        {
+            currentCurrency += ladybugCurrency;
+            SetCurrency(currentCurrency);
+        }
+        else if (type.ToLower().Substring(0, 12) == "enemytermite")
+        {
+            currentCurrency += termiteCurrency;
             SetCurrency(currentCurrency);
         }
     }
