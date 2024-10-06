@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class enemyLife : MonoBehaviour
 {
+    private CurrencyManager currencyManager;
     public int MaxLife = 100;
     public int currentLife;
 
@@ -10,8 +11,9 @@ public class enemyLife : MonoBehaviour
     public Vector3 lifeBarOffset = new Vector3(0, 50, 0);
     public Camera mainCamera;
 
-    public void Start()
+    public void Awake()
     {
+        currencyManager = GameObject.Find("CurrencyManager").GetComponent<CurrencyManager>();
         currentLife = MaxLife;
         lifeBar.SetMaxLife(MaxLife);
 
@@ -43,6 +45,7 @@ public class enemyLife : MonoBehaviour
 
         if (currentLife <= 0)
         {
+            currencyManager.AddCurrencyOnDeath(gameObject.name);
             Die();
         }
     }
