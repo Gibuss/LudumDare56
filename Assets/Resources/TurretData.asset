@@ -19,22 +19,22 @@ MonoBehaviour:
     - level: 1
       targetingRange: 2
       damage: 1
-      damageInterval: 0.5
+      damageInterval: 2
     - level: 2
       targetingRange: 2
-      damage: 1.5
-      damageInterval: 0.4
+      damage: 2
+      damageInterval: 1
     - level: 3
       targetingRange: 2
-      damage: 2
-      damageInterval: 0.3
+      damage: 3
+      damageInterval: 0.25
   - name: Hornet
     prefab: {fileID: 1451738298445842288, guid: 4d945881d7045d344aa9296e89614ae8, type: 3}
     upgrades:
     - level: 1
       targetingRange: 3
       damage: 2
-      damageInterval: 0.75
+      damageInterval: 1
     - level: 2
       targetingRange: 3
       damage: 3
@@ -42,7 +42,7 @@ MonoBehaviour:
     - level: 3
       targetingRange: 3
       damage: 4
-      damageInterval: 1
+      damageInterval: 0.8
   - name: Wasp
     prefab: {fileID: 1451738298445842288, guid: 490fd6cd16f71d34ca953d47379d7caf, type: 3}
     upgrades:
