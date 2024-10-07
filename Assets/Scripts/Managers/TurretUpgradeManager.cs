@@ -4,7 +4,8 @@ public class TurretUpgradeManager : MonoBehaviour
 {
     public string turretName;
     public int currentLevel = 1;
-    private TurretData turretData;
+
+    [SerializeField] private TurretData turretData; // Référence dans l'inspecteur
 
     private float targetingRange;
     private int damage;
@@ -24,10 +25,9 @@ public class TurretUpgradeManager : MonoBehaviour
             return;
         }
 
-        turretData = Resources.Load<TurretData>("TurretData");
         if (turretData == null)
         {
-            Debug.LogError("TurretData introuvable dans Resources.");
+            Debug.LogError("TurretData n'est pas assigné dans l'inspecteur.");
             return;
         }
 
@@ -70,26 +70,36 @@ public class TurretUpgradeManager : MonoBehaviour
     private void ApplyUpgrade(int level)
     {
         Debug.Log($"Application de l'amélioration pour la tourelle '{turretName}' au niveau {level}");
-        TurretUpgrade upgrade = turretData.GetUpgrade(turretName, level);
+        TurretType turretType = turretData.turretTypes.Find(type => type.name == turretName); // Cherchez le type de tourelle
 
-        if (upgrade != null)
+        if (turretType != null)
         {
-            targetingRange = upgrade.targetingRange;
-            damage = (int)upgrade.damage;
-            damageInterval = upgrade.damageInterval;
+            TurretUpgrade upgrade = turretType.upgrades.Find(upg => upg.level == level); // Récupérez l'amélioration
 
-            Debug.Log($"Amélioration trouvée : Portée = {targetingRange}, Dégâts = {damage}, Intervalle = {damageInterval}");
-            turret.SetStats(targetingRange, damage, damageInterval);
-
-            TurretStatsDisplay statsDisplay = FindObjectOfType<TurretStatsDisplay>();
-            if (statsDisplay != null)
+            if (upgrade != null)
             {
-                statsDisplay.UpdateStats(turretName, currentLevel, damage, targetingRange, damageInterval);
+                targetingRange = upgrade.targetingRange;
+                damage = (int)upgrade.damage;
+                damageInterval = upgrade.damageInterval;
+
+                Debug.Log($"Amélioration trouvée : Portée = {targetingRange}, Dégâts = {damage}, Intervalle = {damageInterval}");
+                turret.SetStats(targetingRange, damage, damageInterval);
+
+                // Mettez à jour les statistiques à afficher
+                if (statsDisplay != null)
+                {
+                    statsDisplay.UpdateStats(turretName, currentLevel, damage, targetingRange, damageInterval);
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"Aucune amélioration trouvée pour la tourelle '{turretName}' niveau {level}.");
             }
         }
         else
         {
-            Debug.LogWarning($"Aucune amélioration trouvée pour la tourelle '{turretName}' niveau {level}.");
+            Debug.LogWarning($"Aucun type de tourelle trouvé avec le nom '{turretName}'.");
         }
     }
+
 }

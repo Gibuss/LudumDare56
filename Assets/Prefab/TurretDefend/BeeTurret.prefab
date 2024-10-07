@@ -59,7 +59,7 @@ MonoBehaviour:
   targetingRange: 2
   damage: 1
   damageInterval: 0.1
-  showGizmos: 1
+  showGizmos: 0
 --- !u!95 &3605669044786467806
 Animator:
   serializedVersion: 5
@@ -147,6 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretName: Bee
   currentLevel: 1
+  turretData: {fileID: 11400000, guid: 7af24833e400a6e44a68beec1e84bf0d, type: 2}
   statsDisplay: {fileID: 4737340190713381858}
 --- !u!61 &257450995643666933
 BoxCollider2D:
@@ -927,6 +928,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9073181525313376861, guid: ed6ab686d613c554a88159217103149d, type: 3}
+      propertyPath: m_SortingOrder
+      value: 20
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -946,6 +951,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4619434887885982279, guid: ed6ab686d613c554a88159217103149d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4737340190713381858}
+    - targetCorrespondingSourceObject: {fileID: 4619434887885982279, guid: ed6ab686d613c554a88159217103149d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1027933528508701310}
   m_SourcePrefab: {fileID: 100100000, guid: ed6ab686d613c554a88159217103149d, type: 3}
 --- !u!224 &340398932763812026 stripped
 RectTransform:
@@ -1016,3 +1024,55 @@ MonoBehaviour:
   rangeText: {fileID: 1001911708187827570}
   atkSpeedText: {fileID: 8081518236646701025}
   damageText: {fileID: 4583902772413362936}
+--- !u!212 &1027933528508701310
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8839873220730212755}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 20
+  m_Sprite: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 0
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
