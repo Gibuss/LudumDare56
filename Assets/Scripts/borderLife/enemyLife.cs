@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class enemyLife : MonoBehaviour
 {
     private CurrencyManager currencyManager;
-    public int MaxLife = 100;
+    public int MaxLife;
     public int currentLife;
 
     public emptylife lifeBarScript;

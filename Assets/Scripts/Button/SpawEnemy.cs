@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
@@ -37,5 +37,16 @@ public class EnemySpawner : MonoBehaviour
         {
             lifeBarRect.localPosition = new Vector3(0, -0.3f, 0);
         }
+
+        //On va chercher le script emptyLife contenu dans un des enfants pour le mettre dans notre script ennemyLife
+        enemyLife lifeEnemy = enemy.GetComponent<enemyLife>();
+        emptylife lifeEmpty = enemy.GetComponentInChildren<emptylife>();
+        lifeEnemy.lifeBarScript = lifeEmpty;
+
+
+        Slider sliderLife = enemy.GetComponentInChildren<Slider>();
+        sliderLife.maxValue = lifeEnemy.MaxLife;
+        sliderLife.value = lifeEnemy.MaxLife;
+        lifeEnemy.lifeBar = sliderLife;
     }
 }
