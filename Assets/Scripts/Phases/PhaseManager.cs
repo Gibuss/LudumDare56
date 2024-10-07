@@ -19,6 +19,7 @@ public class PhaseManager : MonoBehaviour
     [Header("Phase Handling")]
     [SerializeField] PhaseDatabase phaseDatabase;
     [SerializeField] private TMP_Text displayedPhase;
+    [SerializeField] private TMP_Text welcome;
     public GameObject winMenu;
 
     private int actualPhase;
@@ -26,6 +27,7 @@ public class PhaseManager : MonoBehaviour
 
     private void Awake()
     {
+        welcome.enabled = false;
         winMenu.SetActive(false);
         maxPhases = phaseDatabase.GetPhases().Length;
         actualPhase = 0;
@@ -35,6 +37,7 @@ public class PhaseManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(LaunchGame());//on lance le jeu, les phases
+        StartCoroutine(Welcome());
     }
 
 
@@ -97,4 +100,13 @@ public class PhaseManager : MonoBehaviour
 
     }
 
-}
+    IEnumerator Welcome()
+    {
+        yield return new WaitForSeconds(1);
+        welcome.enabled = true;
+        welcome.text = "PROTECT THE HIVE";
+        yield return new WaitForSeconds(3);
+        welcome.enabled = false;
+    }
+
+   }
