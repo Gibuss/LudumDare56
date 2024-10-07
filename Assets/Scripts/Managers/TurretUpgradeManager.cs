@@ -5,8 +5,7 @@ public class TurretUpgradeManager : MonoBehaviour
     public string turretName;
     public int currentLevel = 1;
 
-    [SerializeField] private TurretData turretData; // Référence dans l'inspecteur
-
+    [SerializeField] private TurretData turretData;
     private float targetingRange;
     private int damage;
     private float damageInterval;
@@ -43,14 +42,49 @@ public class TurretUpgradeManager : MonoBehaviour
             return false;
         }
 
-        if (currentLevel < 3)
+        TurretType turretType = turretData.turretTypes.Find(type => type.name == turretName);
+        if (turretType != null)
         {
-            StartCoroutine(PerformUpgrade());
-            return true;
+            TurretUpgrade upgrade = turretType.upgrades.Find(upg => upg.level == currentLevel);
+
+            Debug.Log($"Tentative d'amélioration de la tourelle : {turretName}, Niveau actuel : {currentLevel}");
+
+            if (upgrade != null)
+            {
+                Debug.Log($"Coût de l'amélioration (Niveau {currentLevel + 1}): {upgrade.cost}");
+
+                CurrencyManager currencyManager = FindObjectOfType<CurrencyManager>();
+                if (currencyManager != null)
+                {
+                    Debug.Log($"Monnaie actuelle : {currencyManager.currentCurrency}");
+
+                    if (currencyManager.CanUpgrade(upgrade.cost))
+                    {
+                        StartCoroutine(PerformUpgrade());
+                        Debug.Log("Amélioration réussie.");
+                        return true;
+                    }
+                    else
+                    {
+                        Debug.Log("Pas assez de monnaie pour effectuer l'amélioration.");
+                        return false;
+                    }
+                }
+                else
+                {
+                    Debug.LogError("CurrencyManager non trouvé dans la scène.");
+                    return false;
+                }
+            }
+            else
+            {
+                Debug.Log("Pas d'amélioration disponible.");
+                return false;
+            }
         }
         else
         {
-            Debug.Log("Niveau maximum atteint. Impossible d'améliorer");
+            Debug.LogError("Type de tourelle non trouvé.");
             return false;
         }
     }
@@ -70,25 +104,25 @@ public class TurretUpgradeManager : MonoBehaviour
     private void ApplyUpgrade(int level)
     {
         Debug.Log($"Application de l'amélioration pour la tourelle '{turretName}' au niveau {level}");
-        TurretType turretType = turretData.turretTypes.Find(type => type.name == turretName); // Cherchez le type de tourelle
+        TurretType turretType = turretData.turretTypes.Find(type => type.name == turretName);
 
         if (turretType != null)
         {
-            TurretUpgrade upgrade = turretType.upgrades.Find(upg => upg.level == level); // Récupérez l'amélioration
+            TurretUpgrade upgrade = turretType.upgrades.Find(upg => upg.level == level);
 
             if (upgrade != null)
             {
                 targetingRange = upgrade.targetingRange;
                 damage = (int)upgrade.damage;
                 damageInterval = upgrade.damageInterval;
+                int cost = upgrade.cost;
 
-                Debug.Log($"Amélioration trouvée : Portée = {targetingRange}, Dégâts = {damage}, Intervalle = {damageInterval}");
+                Debug.Log($"Amélioration trouvée : Portée = {targetingRange}, Dégâts = {damage}, Intervalle = {damageInterval}, Coût = {cost}");
                 turret.SetStats(targetingRange, damage, damageInterval);
 
-                // Mettez à jour les statistiques à afficher
                 if (statsDisplay != null)
                 {
-                    statsDisplay.UpdateStats(turretName, currentLevel, damage, targetingRange, damageInterval);
+                    statsDisplay.UpdateStats(turretName, currentLevel, damage, targetingRange, damageInterval, cost);
                 }
             }
             else
@@ -101,5 +135,4 @@ public class TurretUpgradeManager : MonoBehaviour
             Debug.LogWarning($"Aucun type de tourelle trouvé avec le nom '{turretName}'.");
         }
     }
-
 }

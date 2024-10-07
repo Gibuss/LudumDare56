@@ -20,12 +20,12 @@ MonoBehaviour:
       targetingRange: 2
       damage: 1
       damageInterval: 1
-      cost: 0
+      cost: 1
     - level: 2
       targetingRange: 2
       damage: 2
       damageInterval: 0.75
-      cost: 0
+      cost: 2
     - level: 3
       targetingRange: 2
       damage: 3
@@ -38,12 +38,12 @@ MonoBehaviour:
       targetingRange: 3
       damage: 2
       damageInterval: 2
-      cost: 0
+      cost: 100
     - level: 2
       targetingRange: 3
       damage: 3
       damageInterval: 1.5
-      cost: 0
+      cost: 200
     - level: 3
       targetingRange: 3
       damage: 4
@@ -56,12 +56,12 @@ MonoBehaviour:
       targetingRange: 2
       damage: 10
       damageInterval: 5
-      cost: 0
+      cost: 150
     - level: 2
       targetingRange: 2
       damage: 20
       damageInterval: 4
-      cost: 0
+      cost: 300
     - level: 3
       targetingRange: 2
       damage: 30

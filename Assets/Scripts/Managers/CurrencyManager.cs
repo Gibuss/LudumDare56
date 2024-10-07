@@ -8,7 +8,7 @@ public class CurrencyManager : MonoBehaviour
 {
     [Header("Initialization")]
     [SerializeField] private TMP_Text displayedCurrency;
-    [SerializeField] private int currentCurrency;
+    [SerializeField] public int currentCurrency;
 
     [Header("Ennemies gains")]
     [SerializeField] private int antGain;
@@ -91,4 +91,16 @@ public class CurrencyManager : MonoBehaviour
             return false;
         }
     }
+
+    public bool CanUpgrade(int upgradeCost)
+    {
+        if (currentCurrency >= upgradeCost)
+        {
+            currentCurrency -= upgradeCost; 
+            SetCurrency(currentCurrency); 
+            return true; 
+        }
+        return false;
+    }
+
 }

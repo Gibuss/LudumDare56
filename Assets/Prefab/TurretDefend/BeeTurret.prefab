@@ -303,9 +303,17 @@ PrefabInstance:
       propertyPath: selectedTurretUpgradeManager
       value: 
       objectReference: {fileID: -3980459137375406278}
+    - target: {fileID: 1365505171946281937, guid: 737bf3325b6fc224caebd076b3debb29, type: 3}
+      propertyPath: costText
+      value: 
+      objectReference: {fileID: 1943192424837633626}
     - target: {fileID: 2276641166399608279, guid: 737bf3325b6fc224caebd076b3debb29, type: 3}
       propertyPath: m_Name
       value: CanvaUiUpgradeInfo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5312784397342821993, guid: 737bf3325b6fc224caebd076b3debb29, type: 3}
+      propertyPath: m_text
+      value: 999
       objectReference: {fileID: 0}
     - target: {fileID: 6337692170295261321, guid: 737bf3325b6fc224caebd076b3debb29, type: 3}
       propertyPath: m_Pivot.x
@@ -387,6 +395,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7134396245352860186, guid: 737bf3325b6fc224caebd076b3debb29, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 129.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -397,6 +409,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6337692170295261321, guid: 737bf3325b6fc224caebd076b3debb29, type: 3}
   m_PrefabInstance: {fileID: 6002548942480742451}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1943192424837633626 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5312784397342821993, guid: 737bf3325b6fc224caebd076b3debb29, type: 3}
+  m_PrefabInstance: {fileID: 6002548942480742451}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4737340190713381858 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1365505171946281937, guid: 737bf3325b6fc224caebd076b3debb29, type: 3}

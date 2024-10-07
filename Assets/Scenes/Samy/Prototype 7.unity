@@ -7228,6 +7228,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2334612546833399426, guid: c191f7d7e10b4fe43aa59ac7becaafee, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6067479477400731621, guid: c191f7d7e10b4fe43aa59ac7becaafee, type: 3}
       propertyPath: PointsA.Array.data[0]
       value: 
@@ -7286,11 +7290,11 @@ PrefabInstance:
       objectReference: {fileID: 1333142678}
     - target: {fileID: 7369892843904511035, guid: c191f7d7e10b4fe43aa59ac7becaafee, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7369892843904511035, guid: c191f7d7e10b4fe43aa59ac7becaafee, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8289585685038299250, guid: c191f7d7e10b4fe43aa59ac7becaafee, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
