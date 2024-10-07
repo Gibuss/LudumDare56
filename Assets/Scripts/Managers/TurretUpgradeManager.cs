@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class TurretUpgradeManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class TurretUpgradeManager : MonoBehaviour
     private Turret turret;
     private bool isUpgrading = false;
 
+    [SerializeField] private TMP_Text levelText;
     [SerializeField] private TurretStatsDisplay statsDisplay;
 
     private void Start()
@@ -123,7 +125,22 @@ public class TurretUpgradeManager : MonoBehaviour
                 if (statsDisplay != null)
                 {
                     statsDisplay.UpdateStats(turretName, currentLevel, damage, targetingRange, damageInterval, cost);
+                    levelText.text = $"{currentLevel}";
+
+                    if (currentLevel == 3)
+                    {
+                        levelText.color = Color.red;
+                    }
+                    else if (currentLevel == 2)
+                    {
+                        levelText.color = new Color(0.68f, 0.85f, 0.9f);
+                    }
+                    else if (currentLevel == 1)
+                    {
+                        levelText.color = Color.white;
+                    }
                 }
+
             }
             else
             {
@@ -135,4 +152,7 @@ public class TurretUpgradeManager : MonoBehaviour
             Debug.LogWarning($"Aucun type de tourelle trouvé avec le nom '{turretName}'.");
         }
     }
+
+
+
 }
