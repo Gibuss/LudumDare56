@@ -2,42 +2,48 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    public float speed = 10f;
-    public int damage = 2;
     private Transform target;
+    private int damage;
+    private float speed = 10f;
 
-    [SerializeField] private float hitRadius = 0.5f;
-
-    public void SetTarget(Transform enemy)
+    public void SetTarget(Transform target)
     {
-        target = enemy;
+        this.target = target;
+    }
+
+    public void SetDamage(int damage)
+    {
+        this.damage = damage;
     }
 
     private void Update()
     {
         if (target == null)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); 
             return;
         }
 
-        Vector2 direction = (Vector2)(target.position - transform.position).normalized;
-        transform.Translate(direction * speed * Time.deltaTime, Space.World);
+        Vector2 direction = (Vector2)(target.position - transform.position);
+        float distanceThisFrame = speed * Time.deltaTime;
 
-        if (Vector2.Distance(transform.position, target.position) < hitRadius)
+        if (direction.magnitude <= distanceThisFrame)
         {
             HitTarget();
+        }
+        else
+        {
+            transform.Translate(direction.normalized * distanceThisFrame, Space.World);
         }
     }
 
     private void HitTarget()
     {
-        enemyLife enemyScript = target.GetComponent<enemyLife>();
-        if (enemyScript != null)
+        enemyLife enemy = target.GetComponent<enemyLife>();
+        if (enemy != null)
         {
-            enemyScript.TakeDamage(damage);
+            enemy.TakeDamage(damage); 
         }
-
-        Destroy(gameObject);
+        Destroy(gameObject); 
     }
 }

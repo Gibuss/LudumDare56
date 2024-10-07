@@ -21,16 +21,16 @@ public class Turret : MonoBehaviour
     private Transform target;
     private float nextDamageTime;
 
+    private void Start()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
     private void Update()
     {
         TargetFind();
         FlipTowardsTarget();
         HandleAttack();
-    }
-
-    private void Start()
-    {
-        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void TargetFind()
@@ -104,15 +104,7 @@ public class Turret : MonoBehaviour
         if (projectileScript != null)
         {
             projectileScript.SetTarget(target);
-        }
-    }
-
-    private void DoDamage(Transform enemy)
-    {
-        enemyLife enemyScript = enemy.GetComponent<enemyLife>();
-        if (enemyScript != null)
-        {
-            enemyScript.TakeDamage(damage);
+            projectileScript.SetDamage(damage);
         }
     }
 
@@ -123,5 +115,12 @@ public class Turret : MonoBehaviour
             Gizmos.color = Color.red;
             Gizmos.DrawWireSphere(transform.position, targetingRange);
         }
+    }
+
+    public void SetStats(float newTargetingRange, int newDamage, float newDamageInterval)
+    {
+        targetingRange = newTargetingRange;
+        damage = newDamage;
+        damageInterval = newDamageInterval;
     }
 }

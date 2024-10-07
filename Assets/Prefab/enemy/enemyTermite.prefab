@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 217fa39da4969b74281f0bfda35e05be, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 333f0aacca1eb6d469964ef179d51cb4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -101,7 +101,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxLife: 10
   currentLife: 0
-  lifeBar: {fileID: 5514988404373280722, guid: 0d52d8abc0871784c8b85fdaf47a7413, type: 3}
+  lifeBarScript: {fileID: 0}
+  lifeBar: {fileID: 0}
   lifeBarObject: {fileID: 0}
   lifeBarOffset: {x: 0, y: 30, z: 0}
   mainCamera: {fileID: 0}
@@ -141,7 +142,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 3}
+    oldSize: {x: 0.48, y: 0.27}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
