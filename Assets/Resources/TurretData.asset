@@ -23,13 +23,13 @@ MonoBehaviour:
       cost: 0
     - level: 2
       targetingRange: 2
-      damage: 2
+      damage: 1
       damageInterval: 1
       cost: 0
     - level: 3
       targetingRange: 2
       damage: 3
-      damageInterval: 0.25
+      damageInterval: 0.5
       cost: 0
   - name: Hornet
     prefab: {fileID: 1451738298445842288, guid: 4d945881d7045d344aa9296e89614ae8, type: 3}
