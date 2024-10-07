@@ -15,41 +15,174 @@ MonoBehaviour:
   phases:
   - steps:
     - ant
+    - 7
+    - ant
     - 0.5
     - ant
+    - 7
+    - ant
+    - 0.5
+    - ant
+    - 1
+    - ant
+    - 0.5
+    - ant
+    - 7
+    - termite
+    - 0.5
+    - ant
+    - 0.5
+    - ant
+    - 0.5
+    - ant
+    - 6
+    - termite
+    - 0.5
+    - ant
+    - 0.5
+    - termite
+    - 0.5
+    - ant
+    - 6
+    - termite
+    - 0.5
+    - termite
+    - 0.5
+    - termite
+    - 5
+    - ant
+    - 0.5
+    - ant
+    - 0.5
+    - ant
+    - 1.5
+    - termite
+    - 0.5
+    - termite
+    - 0.5
+    - termite
   - steps:
     - ant
     - 0.5
-    - ant
-    - 1.2
     - termite
+    - 0.5
+    - ant
+    - 0.5
+    - termite
+    - 0.5
+    - ant
+    - 0.5
+    - termite
+    - 7
+    - ladybug
+    - 6
+    - ant
+    - 0.5
+    - termite
+    - 0.5
+    - ladybug
+    - 6
+    - ladybug
+    - 0.5
+    - ant
+    - 0.5
+    - ant
+    - 0.5
+    - ant
+    - 0.5
+    - ladybug
+    - 6
+    - ladybug
+    - 0.5
+    - ladybug
+    - 0.5
+    - ladybug
+    - 1
+    - termite
+    - 0.5
+    - termite
+    - 6
+    - ladybug
+    - 0.5
+    - termite
+    - 0.5
+    - ant
+    - 0.5
+    - ant
+    - 0.5
+    - ladybug
+    - 0.5
+    - ladybug
     - 0.5
     - termite
   - steps:
+    - termite
+    - 0.5
+    - ladybug
+    - '0.5 '
     - ant
     - 0.5
     - ant
-    - 1.2
-    - termite
-    - 0.5
-    - termite
-    - 1.2
-    - ladybug
-    - 0.5
-    - ladybug
-  - steps:
-    - ant
     - 0.5
     - ant
-    - 1.2
-    - termite
-    - 0.5
-    - termite
-    - 1.2
+    - 1.5
     - ladybug
-    - 0.5
-    - ladybug
-    - 1.2
+    - 5
     - beetle
+    - 5
+    - beetle
+    - 0.5
+    - beetle
+    - 1
+    - ladybug
+    - 0.5
+    - ladybug
+    - 1
+    - ant
+    - 0.5
+    - ant
+    - 0.5
+    - ant
+    - 0.5
+    - ant
+    - 1
+    - termite
+    - 0.5
+    - termite
+    - 0.5
+    - termite
+    - 7
+    - ladybug
+    - 0.5
+    - termite
+    - 0.5
+    - beetle
+    - 0.5
+    - beetle
+    - 0.5
+    - ant
+    - 0.5
+    - termite
+    - 0.5
+    - ant
+    - 0.5
+    - ladybug
+    - 2
+    - beetle
+    - 0.5
+    - ant
+    - 0.5
+    - beetle
+    - 0.5
+    - termite
+    - 2
+    - ladybug
+    - 0.5
+    - ant
+    - 0.5
+    - ant
+    - beetle
+    - 0.5
+    - termite
     - 0.5
     - beetle

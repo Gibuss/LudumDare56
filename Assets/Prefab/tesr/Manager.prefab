@@ -326,8 +326,10 @@ MonoBehaviour:
   termiteSpawner: {fileID: 8764174341044422169}
   ladybugSpawner: {fileID: 6871872120444310857}
   beetleSpawner: {fileID: 4596341373591931683}
-  timeBeetwenPhases: 5
+  timeAtStart: 5
+  timeBeetwenPhases: 15
   phaseDatabase: {fileID: 11400000, guid: 293dc79c89c304946a96db888fb0fe80, type: 2}
+  displayedPhase: {fileID: 0}
 --- !u!1 &4998766712551377323
 GameObject:
   m_ObjectHideFlags: 0
