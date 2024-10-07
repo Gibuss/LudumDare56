@@ -8,7 +8,9 @@ public class TurretUpgrade
     public float targetingRange;
     public float damage;
     public float damageInterval;
+    public int cost; 
 }
+
 
 [System.Serializable]
 public class TurretType

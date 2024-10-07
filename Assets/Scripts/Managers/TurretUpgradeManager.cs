@@ -11,6 +11,9 @@ public class TurretUpgradeManager : MonoBehaviour
     private float damageInterval;
 
     private Turret turret;
+    private bool isUpgrading = false;
+
+    [SerializeField] private TurretStatsDisplay statsDisplay;
 
     private void Start()
     {
@@ -29,26 +32,39 @@ public class TurretUpgradeManager : MonoBehaviour
         }
 
         Debug.Log($"Nom de la tourelle : {turretName}, Niveau actuel : {currentLevel}");
-
         ApplyUpgrade(currentLevel);
     }
 
-    private void Update()
+    public bool UpgradeTurret()
     {
-    }
+        if (isUpgrading)
+        {
+            Debug.Log("Une amélioration est déjà en cours.");
+            return false;
+        }
 
-    public void UpgradeTurret()
-    {
         if (currentLevel < 3)
         {
-            currentLevel++;
-            Debug.Log($"Amélioration de la tourelle. Nouveau niveau : {currentLevel}");
-            ApplyUpgrade(currentLevel);
+            StartCoroutine(PerformUpgrade());
+            return true;
         }
         else
         {
             Debug.Log("Niveau maximum atteint. Impossible d'améliorer");
+            return false;
         }
+    }
+
+    private System.Collections.IEnumerator PerformUpgrade()
+    {
+        isUpgrading = true;
+        currentLevel++;
+        Debug.Log($"Amélioration de la tourelle. Nouveau niveau : {currentLevel}");
+        ApplyUpgrade(currentLevel);
+
+        yield return new WaitForSeconds(1.5f);
+
+        isUpgrading = false;
     }
 
     private void ApplyUpgrade(int level)
@@ -64,6 +80,12 @@ public class TurretUpgradeManager : MonoBehaviour
 
             Debug.Log($"Amélioration trouvée : Portée = {targetingRange}, Dégâts = {damage}, Intervalle = {damageInterval}");
             turret.SetStats(targetingRange, damage, damageInterval);
+
+            TurretStatsDisplay statsDisplay = FindObjectOfType<TurretStatsDisplay>();
+            if (statsDisplay != null)
+            {
+                statsDisplay.UpdateStats(turretName, currentLevel, damage, targetingRange, damageInterval);
+            }
         }
         else
         {
