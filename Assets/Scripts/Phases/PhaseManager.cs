@@ -19,12 +19,14 @@ public class PhaseManager : MonoBehaviour
     [Header("Phase Handling")]
     [SerializeField] PhaseDatabase phaseDatabase;
     [SerializeField] private TMP_Text displayedPhase;
+    public GameObject winMenu;
 
     private int actualPhase;
     private int maxPhases;
 
     private void Awake()
     {
+        winMenu.SetActive(false);
         maxPhases = phaseDatabase.GetPhases().Length;
         actualPhase = 0;
         displayedPhase.text = string.Format("{0}/{1}", actualPhase, maxPhases);
@@ -88,7 +90,11 @@ public class PhaseManager : MonoBehaviour
                 }
             }
         }
-        
+
+        yield return new WaitForSeconds(15);
+        winMenu.SetActive(true);
+        Time.timeScale = 0f;
+
     }
 
 }

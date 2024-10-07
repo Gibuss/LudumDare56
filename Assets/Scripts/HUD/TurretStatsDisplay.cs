@@ -14,7 +14,9 @@ public class TurretStatsDisplay : MonoBehaviour
     {
         levelText.text = $"{turretName} (Lvl. {level})";
         rangeText.text = $"Range | {range}";
-        atkSpeedText.text = $"Atk Speed | {1 / interval}";
+        float atkSpeed = 1 / interval;
+        atkSpeed = Mathf.Round(atkSpeed * 10.0f) * 0.1f;
+        atkSpeedText.text = $"Atk Speed | {atkSpeed}";
         damageText.text = $"Dmg | {damage}";
         costText.text = $"{cost}"; 
     }
