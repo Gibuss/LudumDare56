@@ -17,53 +17,53 @@ MonoBehaviour:
     prefab: {fileID: 1451738298445842288, guid: 5a5b77489326d3949835b4eba046d320, type: 3}
     upgrades:
     - level: 1
-      targetingRange: 2
+      targetingRange: 3.5
       damage: 1
-      damageInterval: 1
-      cost: 1
+      damageInterval: 0.47
+      cost: 20
     - level: 2
-      targetingRange: 2
-      damage: 2
-      damageInterval: 0.75
-      cost: 2
+      targetingRange: 3.5
+      damage: 1.6
+      damageInterval: 0.42
+      cost: 35
     - level: 3
-      targetingRange: 2
-      damage: 3
-      damageInterval: 0.5
+      targetingRange: 3.5
+      damage: 2.2
+      damageInterval: 0.37
       cost: 0
   - name: Hornet
     prefab: {fileID: 1451738298445842288, guid: 4d945881d7045d344aa9296e89614ae8, type: 3}
     upgrades:
     - level: 1
-      targetingRange: 3
-      damage: 2
+      targetingRange: 2
+      damage: 3.5
       damageInterval: 2
-      cost: 100
+      cost: 30
     - level: 2
-      targetingRange: 3
-      damage: 3
-      damageInterval: 1.5
-      cost: 200
+      targetingRange: 2
+      damage: 5
+      damageInterval: 1.8
+      cost: 50
     - level: 3
-      targetingRange: 3
-      damage: 4
-      damageInterval: 1
+      targetingRange: 2
+      damage: 6.5
+      damageInterval: 1.6
       cost: 0
   - name: Wasp
     prefab: {fileID: 1451738298445842288, guid: 490fd6cd16f71d34ca953d47379d7caf, type: 3}
     upgrades:
     - level: 1
-      targetingRange: 2
+      targetingRange: 5
       damage: 10
       damageInterval: 5
-      cost: 150
+      cost: 45
     - level: 2
-      targetingRange: 2
-      damage: 20
-      damageInterval: 4
-      cost: 300
+      targetingRange: 5
+      damage: 13
+      damageInterval: 4.5
+      cost: 70
     - level: 3
-      targetingRange: 2
-      damage: 30
-      damageInterval: 3
+      targetingRange: 5
+      damage: 16
+      damageInterval: 4
       cost: 0

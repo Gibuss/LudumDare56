@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro; // Assurez-vous d'inclure cela pour utiliser TextMeshPro
 
 public class TurretUpgradeManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class TurretUpgradeManager : MonoBehaviour
     private bool isUpgrading = false;
 
     [SerializeField] private TurretStatsDisplay statsDisplay;
+    [SerializeField] private TMP_Text levelText; // Assurez-vous que cela est bien configuré dans l'inspecteur
 
     private void Start()
     {
@@ -123,6 +125,21 @@ public class TurretUpgradeManager : MonoBehaviour
                 if (statsDisplay != null)
                 {
                     statsDisplay.UpdateStats(turretName, currentLevel, damage, targetingRange, damageInterval, cost);
+                    levelText.text = $"{currentLevel}";
+
+                    // Changer la couleur du texte selon le niveau
+                    if (currentLevel == 3)
+                    {
+                        levelText.color = Color.red;
+                    }
+                    else if (currentLevel == 2)
+                    {
+                        levelText.color = new Color(0.68f, 0.85f, 0.9f); // Light Blue
+                    }
+                    else if (currentLevel == 1)
+                    {
+                        levelText.color = Color.white;
+                    }
                 }
             }
             else

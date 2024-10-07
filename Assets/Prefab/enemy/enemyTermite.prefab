@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1243472803628972577}
   - component: {fileID: 1308547602907403499}
   - component: {fileID: 4521057133125765254}
+  - component: {fileID: 3178503313443608403}
   m_Layer: 6
   m_Name: enemyTermite
   m_TagString: Enemy
@@ -181,3 +182,24 @@ MonoBehaviour:
   - {fileID: 7090114801739805939, guid: f55ba5a01238fca408300fb8b0eaeb12, type: 3}
   moveSpeed: 1.5
   offsetRange: 0.32
+--- !u!95 &3178503313443608403
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5398747570160323041}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 75f39d0b1a33c28438fbdd7470bb4d1d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
